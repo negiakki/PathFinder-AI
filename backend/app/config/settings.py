@@ -5,12 +5,16 @@ All secrets are read from environment variables (never hardcoded).
 A .env file is loaded automatically in development.
 """
 from functools import lru_cache
+from pathlib import Path
 from pydantic_settings import BaseSettings, SettingsConfigDict
+
+# Resolve .env relative to this file (backend/app/config/settings.py → backend/.env)
+_ENV_FILE = Path(__file__).parent.parent.parent / ".env"
 
 
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(
-        env_file=".env",
+        env_file=str(_ENV_FILE),
         env_file_encoding="utf-8",
         case_sensitive=False,
         protected_namespaces=("settings_",),   # avoids conflict with model_id field

@@ -1,12 +1,15 @@
-/**
- * pdfExport.js — client-side PDF generation utilities.
- *
- * Uses react-to-pdf for rendering the Career Report.
- * Implementation completed in Phase 7.
- */
+import generatePDF, { Resolution, Margin } from 'react-to-pdf'
 
-// Placeholder — implementation added in Phase 7 (PDF Export).
-export function downloadReportAsPDF(_reportRef, _studentName) {
-  // TODO (Phase 7): trigger react-to-pdf download
-  console.warn('PDF export not yet implemented — scheduled for Phase 7.')
+/**
+ * downloadReportAsPDF — captures the rendered Career Report (Analysis page)
+ * and saves it as a PDF, entirely client-side.
+ */
+export function downloadReportAsPDF(reportRef, careerTitle) {
+  const filename = `PathFinder-AI-Report-${(careerTitle || 'Career').replace(/\s+/g, '-')}.pdf`
+  return generatePDF(reportRef, {
+    method: 'save',
+    filename,
+    resolution: Resolution.MEDIUM,
+    page: { margin: Margin.MEDIUM },
+  })
 }

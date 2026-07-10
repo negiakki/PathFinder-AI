@@ -6,10 +6,10 @@ import { Compass } from 'lucide-react'
  */
 export default function Footer() {
   return (
-    <footer className="w-full border-t border-border bg-white mt-auto">
-      <div className="max-w-page mx-auto px-6 py-8 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-text-secondary">
+    <footer className="w-full border-t border-border dark:border-gray-800 bg-white dark:bg-gray-900 mt-auto transition-colors duration-300">
+      <div className="max-w-page mx-auto px-6 py-8 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-text-secondary dark:text-gray-400">
         {/* Brand */}
-        <div className="flex items-center gap-2 font-semibold text-text-primary">
+        <div className="flex items-center gap-2 font-semibold text-text-primary dark:text-gray-100">
           <Compass className="text-ibm-blue" size={18} />
           PathFinder AI
         </div>
@@ -32,7 +32,7 @@ export default function Footer() {
           href="https://github.com"
           target="_blank"
           rel="noopener noreferrer"
-          className="hover:text-text-primary transition-colors"
+          className="hover:text-text-primary dark:hover:text-gray-100 transition-colors"
         >
           GitHub
         </a>

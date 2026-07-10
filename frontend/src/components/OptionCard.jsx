@@ -17,8 +17,8 @@ export default function OptionCard({ label, selected = false, onClick, disabled 
         'card w-full text-left px-6 py-4 cursor-pointer',
         'transition-all duration-smooth',
         selected
-          ? 'bg-ibm-blue text-white border-ibm-blue shadow-md'
-          : 'hover:border-ibm-blue hover:-translate-y-0.5 hover:shadow-md',
+          ? 'bg-ibm-blue dark:bg-ibm-blue text-white border-ibm-blue dark:border-ibm-blue shadow-md'
+          : 'hover:border-ibm-blue hover:-translate-y-0.5 hover:shadow-md dark:text-gray-100',
         disabled ? 'opacity-50 cursor-not-allowed' : '',
       ].join(' ')}
     >

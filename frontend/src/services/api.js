@@ -16,21 +16,21 @@ export async function healthCheck() {
 
 /**
  * Send the student's assessment answers to the backend
- * and receive a structured Career Report JSON.
+ * and receive a structured Career Analysis JSON.
  *
  * @param {Object} answers — the compiled assessment payload
- * @returns {Promise<Object>} — the career report object
+ * @returns {Promise<Object>} — the career analysis object
  */
-export async function submitAssessment(answers) {
-  const res = await fetch(`${BASE_URL}/api/assessment`, {
+export async function analyzeAssessment(answers) {
+  const res = await fetch(`${BASE_URL}/api/analyze`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(answers),
+    body: JSON.stringify({ answers }),
   })
 
   if (!res.ok) {
     const detail = await res.json().catch(() => ({}))
-    throw new Error(detail?.detail || 'Unable to generate report right now. Please try again.')
+    throw new Error(detail?.detail || 'Unable to generate analysis right now. Please try again.')
   }
 
   return res.json()

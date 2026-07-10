@@ -20,18 +20,6 @@
 
 export const commonQuestions = [
   {
-    id: 'current_class',
-    question: 'Which class are you currently in?',
-    type: 'single',
-    required: true,
-    options: [
-      { value: '9',  label: 'Class 9' },
-      { value: '10', label: 'Class 10' },
-      { value: '11', label: 'Class 11' },
-      { value: '12', label: 'Class 12' },
-    ],
-  },
-  {
     id: 'language',
     question: 'Which language do you prefer?',
     type: 'single',
