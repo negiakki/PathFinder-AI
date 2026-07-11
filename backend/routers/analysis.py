@@ -13,21 +13,14 @@ from services.analysis_service import analyze
 router = APIRouter(prefix="/api", tags=["Analysis"])
 
 
-logger = __import__("logging").getLogger(__name__)
-
-
 @router.post("/analyze", response_model=AnalyzeResponse)
 async def analyze_assessment(payload: AnalyzeRequest):
     """
     Accept student assessment answers and return a structured career analysis.
 
-    For this phase, the answers are forwarded to the service layer
-    which returns the same mock response regardless of input.
-    Replacing mock data with IBM watsonx.ai only requires changing
-    the service layer implementation.
+    The answers are forwarded to the service layer, which calls IBM watsonx.ai
+    for a personalised report and falls back to mock data on failure.
     """
-    import json as _j
-    logger.info(_j.dumps(payload.answers, ensure_ascii=True))
     try:
         result = await analyze(payload.answers)
         return result

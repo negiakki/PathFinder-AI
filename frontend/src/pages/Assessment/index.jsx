@@ -285,8 +285,8 @@ export default function Assessment() {
       setScreen(SCREEN.LOADING)
       setIsLoading(true)
       setError(null)
-      const { class_selected, ...payload } = answers
-      console.log("[DEBUG] answers", payload)
+      const { class_selected, ...rest } = answers
+      const payload = { ...rest, current_class: class_selected }
       analyzeAssessment(payload)
         .then(report => {
           setReport(report)

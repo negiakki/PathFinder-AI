@@ -73,6 +73,37 @@ None. Frontend production build emits a non-blocking Vite warning about one chun
 
 ---
 
+# Bug Fix Log
+
+## AI Recommendations Not Personalized (fixed)
+
+**Root cause:** The frontend sent the class-selection answer to the backend under
+the key `class_selected`, but `services/prompt_template.py` reads
+`answers["current_class"]` when building the watsonx.ai prompt. Since the key
+never matched, every request's prompt showed the same "Not provided" value for
+current class, so watsonx.ai regularly returned near-identical recommendations
+regardless of the student's actual answers.
+
+**Fix implemented:**
+- `frontend/src/pages/Assessment/index.jsx` — remap `class_selected` to
+  `current_class` when building the `/api/analyze` payload.
+- `backend/routers/analysis.py` — removed temporary debug logging
+  (`logger.info(json.dumps(...))`) added while diagnosing the issue, and
+  removed the now-unused logger; refreshed the endpoint docstring, which still
+  described the old mock-only behavior.
+
+**Verification performed:**
+- Submitted multiple distinct student profiles (different class, stream,
+  interests) through the deployed frontend and confirmed each produced a
+  distinct, personalized career report.
+- Confirmed `current_class` now arrives correctly in the backend payload and
+  is reflected in the prompt sent to IBM watsonx.ai.
+- Confirmed no temporary/debug code remains in either touched file.
+
+**Current status:** AI recommendation engine is production-ready.
+
+---
+
 # Notes
 
 - Build only the MVP.
