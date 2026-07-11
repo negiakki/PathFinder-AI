@@ -135,6 +135,36 @@ uvicorn main:app --reload     # http://localhost:8000
 
 ---
 
+## Build Instructions
+
+**Frontend** — production build output goes to `frontend/dist/`:
+
+```bash
+cd frontend
+npm run build      # outputs frontend/dist/
+npm run preview    # serve the build locally to sanity-check
+```
+
+**Backend** — production start command (binds to `0.0.0.0` and `$PORT`, no `--reload`):
+
+```bash
+uvicorn main:app --host 0.0.0.0 --port $PORT
+```
+
+`backend/Procfile` already defines this for Render/Heroku-style platforms.
+
+---
+
+## Deployment Prerequisites
+
+- Set `VITE_API_URL` on the frontend host (Vercel) to the deployed backend URL, e.g. `https://your-backend.onrender.com`.
+- Set `FRONTEND_URL` on the backend host (Render) to the deployed frontend URL, e.g. `https://your-app.vercel.app` — used for CORS.
+- Set `IBM_API_KEY`, `IBM_PROJECT_ID`, `IBM_URL`, and `MODEL_ID` on the backend host. Never commit real values — `backend/.env` is gitignored.
+- Backend start command: `uvicorn main:app --host 0.0.0.0 --port $PORT` (see `backend/Procfile`).
+- Frontend build command: `npm run build`, output directory: `frontend/dist`.
+
+---
+
 ## Development Progress
 
 See [`docs/PROJECT_STATUS.md`](docs/PROJECT_STATUS.md) for the current phase and completion status.
