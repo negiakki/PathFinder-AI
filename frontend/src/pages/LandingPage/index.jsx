@@ -64,10 +64,6 @@ export default function LandingPage() {
 
           {/* Text */}
           <div className="flex-1 text-center lg:text-left">
-            <span className="inline-block mb-4 text-xs font-semibold tracking-widest text-ibm-blue uppercase bg-blue-50 dark:bg-blue-950 border border-blue-200 dark:border-blue-800 px-3 py-1 rounded-full">
-              Powered by IBM watsonx.ai
-            </span>
-
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-text-primary dark:text-gray-100 leading-tight tracking-tight">
               Your Personal{' '}
               <span className="text-ibm-blue">AI Career</span>{' '}
